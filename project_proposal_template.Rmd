@@ -1,0 +1,54 @@
+---
+title: "STAA57 W19 - Project Proposal"
+author:  "Team G?"
+output: html_notebook
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+***
+
+#### Research Questions
+
+1. Specify which questions you will address.
+
+
+2. Specify your data analysis plan 
+
+
+#### Data Description
+
+3. Specify your data sources and data collection methods.
+
+
+4. Identify the variables/observations you will use for your analysis.
+
+>
+**National Graduate Survey (2013)**:
+The following variables are key in analyzing our data. They will be used to filter, sort, and correlate data accordingly.
+>
+* CNDPERSP, total personal income from all sources in 2013
+* JOBINCP, gross annual earnings from 2013
+* DBTALGRD, debt of all loans at time of graduation (2009/10)
+* DBTALINT, debt of all loans at time of interview (2013)
+* DBTGSGRD, debt of government sponsored student loans at time of graduation (2009/2010)
+* DBTGSINT, debt of government sponsored student loans at time of interview (2013)
+* LFSTAT, labour force status in 2013 reference week
+
+
+#### Getting Started 
+
+5. Load data into R.
+>
+```{r}
+ngs = read.csv("ngs.csv")
+#cis = read.csv("cis.csv")
+ngs %>% head
+#cis %>% head
+```
+
+6. Explore data 
+
+
