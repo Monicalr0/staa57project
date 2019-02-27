@@ -41,14 +41,30 @@ The following variables are key in analyzing our data. They will be used to filt
 #### Getting Started 
 
 5. Load data into R.
->
+
 ```{r}
 ngs = read.csv("ngs.csv")
-#cis = read.csv("cis.csv")
+cis = read.csv("cis.csv")
 ngs %>% head
-#cis %>% head
+cis %>% head
 ```
 
 6. Explore data 
 
+```{r}
+ngs %>% mutate(lfstat = (lfstat == 1)) %>%
+  ggplot(aes(lfstat)) + geom_bar() + xlab("Currently Employed") + ylab("frequency")
+```
+
+```{r}
+ngs %>% filter(lfstat == 1, jobincp != 99 & jobincp != 96) %>% mutate(jobincp = factor(jobincp, labels = c("0-9 999", "-19 999", "-29 999", "-39 999", "-49 999", "-59 999", "-69 999", "-79 999", "-89 999", "90 000+"))) %>% 
+  ggplot(aes(jobincp)) + geom_bar() + xlab("Annual income") + ylab("frequency")
+```
+
+```{r}
+ngs %>% filter(lfstat == 1, jobincp != 99 & jobincp != 96, dbtalgrd != 6 & dbtalgrd != 9) %>% 
+  mutate(jobincp = factor(jobincp, labels = c("0-9 999", "-19 999", "-29 999", "-39 999", "-49 999", "-59 999", "-69 999", "-79 999", "-89 999", "90 000+"))) %>%
+  group_by(jobincp) %>% summarise(owed = mean(dbtalgrd)) %>%
+  ggplot(aes (jobincp, owed)) + geom_histogram(stat = "identity") + ylab("Amount owed (2 = 5k-10k)") + xlab("salary")
+```
 
