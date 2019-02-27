@@ -28,6 +28,21 @@ In our analysis we will be using a combination of education data and employment 
 
 3. Specify your data sources and data collection methods.
 
+Since we want to measure the difference on income and unemployment rate between people who graduated from university and people who not, we want to find the employment condition of all these people in the same year.  Based on three key words “education”, “income” and “unemployment” we found two data source we want to use.
+
+The first one is the National Graduates Survey 2013 (for class of 2009/2010), which include detailed information about the employment condition of people who should  graduate at 2009 or 2010, aiming to see how postsecondary program helps people on their career. The data of NGS(2013) is collected  through questionnaire, the target population is the graduates from Canadian public postsecondary education institutions (universities, colleges, trade schools) who graduated or completed the requirements for degrees, diplomas or certificates during the reference school year(2009 & 2010). The potential issue for this dataset are Non-response bias, as there are some people fail to answer some of the questions and these questioned have only “not stated”, and also there is bias caused by some automatic editing of the survey, for example, for income, if the input for hourly salary is too high this will change to annual salary, while those in between or some extreme value may be classified wrong, causing inaccuracy. 
+
+The second one is the Country Income Survey 2013. As NGS doesn’t contain the data for people who do not complete post secondary education, we want to use this data as to make comparison. The target population is all individuals in Canada, with few exclusion lower than 3% of population. The data mainly collected by asking one knowledgeable household member for all members’ information in one household. The main bias are the coverage bias and the lack of accuracy due to the way data is collect(collected through only one people each household).
+
+Reference 1(NGS): http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&Id=122604
+
+Questionnaire of reference 1: http://www23.statcan.gc.ca/imdb/p3Instr.pl?Function=assembleInstr&a=1&&lang=en&Item_Id=150151 
+
+Reference 2(CIS): http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=5200
+
+Questionnaire of reference 2:http://www23.statcan.gc.ca/imdb/p3Instr.pl?Function=assembleInstr&a=1&&lang=en&Item_Id=424634
+
+
 
 4. Identify the variables/observations you will use for your analysis.
 
