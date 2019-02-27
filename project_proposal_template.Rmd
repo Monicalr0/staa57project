@@ -43,6 +43,17 @@ The following variables are key in analyzing our data. They will be used to filt
 * DBTGSINT, debt of government sponsored student loans at time of interview (2013)
 * LFSTAT, labour force status in 2013 reference week
 
+>
+**Canadian Income Survey (2013)**:
+Hundreds of variables are provided, but the variables key to our analysis are listed below.
+>
+
+* AGEGP, person’s age group as of December 31 of 2013
+* HLEV2G, highest level of education of person
+* STUDFTP, attended school/college/CEGEP/university during 2013
+* EFATINC, after-tax income
+
+
 
 #### Getting Started 
 
