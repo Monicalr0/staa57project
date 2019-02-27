@@ -14,8 +14,14 @@ library(tidyverse)
 
 1. Specify which questions you will address.
 
+The initial question of "Is university education worth it?" was rather broad so we wanted to find a clear concise way of simplifying it while still trying our best to answer it. One of the major factors about post secondary education in general is to try to find a better job than if you were to have skipped out on it entirely. So we wanted to delve deeper into the world of if getting a degree actually affects how much money you end up making in the future. The question we will be focusing our research on will be "Does a university degree actually translate to better pay in the future?" and then hopefully we can investigate "How fast will you be able to recoup your investment in post secondary education?".
 
-2. Specify your data analysis plan 
+
+
+2. Specify your data analysis plan
+
+In our analysis we will be using a combination of education data and employment data. A good place to start will be to start looking at data that explains or shows how much people with all kinds of education backgrounds make. So we could filter the observations in the data set we use to see which individuals did receive a university degree and the ones that didn't. From there we could then look at the average of the salaries of the university graduates and compare it to the average of the salaries of workers who did not graduate and compare the values and try to draw a conclusion.We can also look at the employment of university graduates versus those who did not attend university to see if those individuals have higher employment. So from there, we can look calculate the unemployment rate of university graduates (doing the relevant calculations of course) and compare it to the unemployment of those who did not go to university and try to further support our argument.
+
 
 
 #### Data Description
