@@ -1,7 +1,9 @@
 ---
 title: "STAA57 W19 - Project Proposal"
-author:  "Team G?"
-output: html_notebook
+author: "Team 12"
+output:
+  html_document:
+    df_print: paged
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -40,7 +42,7 @@ Questionnaire of reference 1: http://www23.statcan.gc.ca/imdb/p3Instr.pl?Functio
 
 Reference 2(CIS): http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=5200
 
-Questionnaire of reference 2:http://www23.statcan.gc.ca/imdb/p3Instr.pl?Function=assembleInstr&a=1&&lang=en&Item_Id=424634
+Questionnaire of reference 2: http://www23.statcan.gc.ca/imdb/p3Instr.pl?Function=assembleInstr&a=1&&lang=en&Item_Id=424634
 
 
 
@@ -62,7 +64,6 @@ The following variables are key in analyzing our data. They will be used to filt
 **Canadian Income Survey (2013)**:
 Hundreds of variables are provided, but the variables key to our analysis are listed below.
 >
-
 * AGEGP, person’s age group as of December 31 of 2013
 * HLEV2G, highest level of education of person
 * STUDFTP, attended school/college/CEGEP/university during 2013
@@ -93,7 +94,7 @@ ngs %>% filter(lfstat == 1, jobincp != 99 & jobincp != 96) %>% mutate(jobincp = 
   ggplot(aes(jobincp)) + geom_bar() + xlab("Annual income") + ylab("frequency")
 ```
 
-```{r}
+```{r warning = FALSE}
 ngs %>% filter(lfstat == 1, jobincp != 99 & jobincp != 96, dbtalgrd != 6 & dbtalgrd != 9) %>% 
   mutate(jobincp = factor(jobincp, labels = c("0-9 999", "-19 999", "-29 999", "-39 999", "-49 999", "-59 999", "-69 999", "-79 999", "-89 999", "90 000+"))) %>%
   group_by(jobincp) %>% summarise(owed = mean(dbtalgrd)) %>%
