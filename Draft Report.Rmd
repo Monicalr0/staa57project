@@ -1,0 +1,124 @@
+---
+title: "STAA57 Final Project Report "
+author: "Team G?? (member names)"
+output: html_notebook
+---
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+## echo=FALSE stops the code chunk from appearing in the html document
+## warning=FALSE / message=FALSE stop R warnings/messages from appearing in the knit document
+library(tidyverse)
+```
+
+
+***
+
+<!-- 
+(everything below in here is an .html comment)
+
+Instructions: 
+- Use typical structure of data analysis report, w/ sections:
+    + Introduction
+    + Data
+    + Analysis
+    + Summary
+    + Appendix (optional)
+- Report should be 5 pages MAX (when compiled/knit as pdf)
+- Appendix does not count towards page limit
+- Put all your data in a separate "./data/" sub-folder 
+- Submit compressed project folder 
+- You submissions should be reproducible (i.e. I should be able to   
+  re-compile your report with a click of the Preview/Knit button) 
+
+-->
+
+## Introduction 
+
+(*Description of questions that are being investigated*)
+
+###Education Level vs. Quality of Life:
+>Our second research question addresses the quality of life of different people, in comparison to their education level. This question hopes to answer the "worth" part of the question "Is a university education *worth* the investment?", as it compares the quality of life between people of different education levels. One of the main concerns of this question is the question of how to measure quality of life within the variables readily available, or in other words, how to quantify it in a way that can be used to analyze statistically without access to data such as happiness, emotional well-being, and such.
+
+## Data 
+
+(*Description of data used to answer the questions*)
+
+###Attempting to quantify Quality of Life:
+####Group by:
+>HLEV2G:  Highest level of education
+This will be the grouping variable that shows sorts the QOL of different deducation levels.
+
+###Exclusion:
+>FLLPRTP: Flag - student during refyear
+This binary variable will be used to filter all current students
+
+
+####Independent variables to consider:
+>
+USZGAP: Adjusted size of residence,
+AGEGP: Age group,
+MARST: Marital status,
+FWORKED: Flag - employed during refyear,
+ALFST: annual labour force status,
+ATINC: after tax income,
+CPPQPP: CPP/QPP benefits,
+CQPC: Pension plan contributions,3
+EARNG: earnings,
+MAJRI: Major source of income,
+OAS: Old age security pension,
+RSPWI: RRSP withdrawals,
+UIBEN: employment insurance benefits,
+HHSIZE: number of household members,
+DWLTYP: type of dwelling,
+DWTENR: ownership of dwelling,
+REPA: condition of dwelling
+Any combination of these variables may be considered to quantify QOL 
+
+
+
+
+## Analysis 
+
+(*Main body of analysis, containing data summaries (tables/plots),  statistical analyses (estimations, tests), and modelling (regression, classification) *)
+
+### Some Subsection Title
+
+<!-- You can organize content in subsections -->
+
+(*Plots should be created in R, and not imported from file*)
+
+```{r, echo = FALSE, fig.width = 5, fig.heigh = 5}
+tibble( t = seq(0, 2*pi, by=0.1) ) %>% 
+  mutate( x = 16*sin(t)^3, 
+          y = 13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t) ) %>% 
+  ggplot(aes( x = x, y = y)) + 
+  geom_polygon( fill = "pink") +
+  coord_fixed() 
+```
+
+#### Some Subsubsection Title
+
+(*R output tables can be converted to .html with* `knitr::kable()`) 
+
+```{r, echo = FALSE}
+tibble( X = c("this", "is"), 
+        Y = c("my", "table") ) %>% 
+  knitr::kable()
+```
+<!-- 
+for more help on RMarkdown see: https://rmarkdown.rstudio.com/lesson-15.html 
+-->
+
+
+## Summary 
+
+(*Recap of your findings and conclusions*)
+
+
+
+***  
+
+## Appendix 
+
+(*Everything here does not count towards page limit*)
+
+
