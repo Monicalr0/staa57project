@@ -42,36 +42,41 @@ Instructions:
 
 (*Description of data used to answer the questions*)
 
-###Attempting to quantify Quality of Life:
-####Group by:
->HLEV2G:  Highest level of education
-This will be the grouping variable that shows sorts the QOL of different deducation levels.
+### Attempting to quantify Quality of Life:
 
-###Exclusion:
->FLLPRTP: Flag - student during refyear
-This binary variable will be used to filter all current students
+##### Group by:
+
+* HLEV2G:  Highest level of education
+  + This will be the grouping variable that shows sorts the QOL of different deducation levels.
+
+##### Exclusion:
+
+* FLLPRTP: Flag - student during refyear
+  + This binary variable will be used to filter all current students
 
 
-####Independent variables to consider:
->
-USZGAP: Adjusted size of residence,
-AGEGP: Age group,
-MARST: Marital status,
-FWORKED: Flag - employed during refyear,
-ALFST: annual labour force status,
-ATINC: after tax income,
-CPPQPP: CPP/QPP benefits,
-CQPC: Pension plan contributions,3
-EARNG: earnings,
-MAJRI: Major source of income,
-OAS: Old age security pension,
-RSPWI: RRSP withdrawals,
-UIBEN: employment insurance benefits,
-HHSIZE: number of household members,
-DWLTYP: type of dwelling,
-DWTENR: ownership of dwelling,
-REPA: condition of dwelling
-Any combination of these variables may be considered to quantify QOL 
+##### Independent variables to consider:
+
+
+* USZGAP: Adjusted size of residence,
+* AGEGP: Age group,
+* MARST: Marital status,
+* FWORKED: Flag - employed during refyear,
+* ALFST: annual labour force status,
+* ATINC: after tax income,
+* CPPQPP: CPP/QPP benefits,
+* CQPC: Pension plan contributions,3
+* EARNG: earnings,
+* MAJRI: Major source of income,
+* OAS: Old age security pension,
+* RSPWI: RRSP withdrawals,
+* UIBEN: employment insurance benefits,
+* HHSIZE: number of household members,
+* DWLTYP: type of dwelling,
+* DWTENR: ownership of dwelling,
+* REPA: condition of dwelling
+
+  + Any combination of these variables may be considered to quantify QOL 
 
 
 
