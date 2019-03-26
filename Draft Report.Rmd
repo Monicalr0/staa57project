@@ -35,6 +35,9 @@ Instructions:
 
 (*Description of questions that are being investigated*)
 
+###How does the unemployment rate of majors differ as time goes on?
+>Our first research question aims to investigate how the unemployment rate of certain majors are affected by length of time during and after graduation. For example: do Computer Science students have a lower rate of unemployment compared to someone who majored in Psychology right after graduation? To investigate these trends, we have broken up age groups into those between the ages of 18-22, 23-34, 35-50, 50-70, and 70+. For each age group, we will identify the average unemployment rate for each major and investigate the trend between age groups for the same majors. Then, we will compare these trends with those from other majors.
+
 ###Education Level vs. Quality of Life:
 >Our second research question addresses the quality of life of different people, in comparison to their education level. This question hopes to answer the "worth" part of the question "Is a university education *worth* the investment?", as it compares the quality of life between people of different education levels. One of the main concerns of this question is the question of how to measure quality of life within the variables readily available, or in other words, how to quantify it in a way that can be used to analyze statistically without access to data such as happiness, emotional well-being, and such.
 
