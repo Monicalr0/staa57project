@@ -1,6 +1,6 @@
 ---
 title: "STAA57 Final Project Report "
-author: "Team G?? (member names)"
+author: "Brian Lin, Ian Gu, Minyi Ma, Navin Chandradat"
 output: html_notebook
 ---
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -34,6 +34,8 @@ Instructions:
 ## Introduction 
 
 (*Description of questions that are being investigated*)
+###How fast will you be able to recoup your investment in post-secondary education?
+>Our first research question addresses the question of how fast one is able to recoup their investment in post-secondary education. To investigate this question, analysis will be done on the income of those who graduate out of high school and enter the labour force, as well as the income of those who invest in a post-secondary education and begin working. Unemployment rate will also be considered when analyzing the results of the LFS.
 
 ###Education Level vs. Quality of Life:
 >Our second research question addresses the quality of life of different people, in comparison to their education level. This question hopes to answer the "worth" part of the question "Is a university education *worth* the investment?", as it compares the quality of life between people of different education levels. One of the main concerns of this question is the question of how to measure quality of life within the variables readily available, or in other words, how to quantify it in a way that can be used to analyze statistically without access to data such as happiness, emotional well-being, and such.
@@ -42,6 +44,14 @@ Instructions:
 
 (*Description of data used to answer the questions*)
 
+### How fast will you be able to recoup your investment in post-secondary education?
+
+##### Key Variables:
+* #LFSTAT, labour force status in 2013 reference week. Used to filter and determine unemployment rate
+* #CNDPERSP, total personal income from all sources in 2013. Will be used with other variables to determine income.
+* #JOBINCP, gross annual earnings from 2013. Will be used with other variables to determine income.
+* #DBTALGRD, debt of all loans at time of graduation (2009/10). Will be used to determine how much investment someone has made in post-secondary education prior to beginning employment.
+ 
 ### Attempting to quantify Quality of Life:
 
 ##### Group by:
@@ -81,9 +91,6 @@ For earning and unemployment
 * REPA: condition of dwelling
 
   + Any combination of these variables may be considered to quantify QOL 
-
-
-
 
 ## Analysis 
 
