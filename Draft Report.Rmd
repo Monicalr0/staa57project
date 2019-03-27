@@ -35,63 +35,49 @@ Instructions:
 
 (*Description of questions that are being investigated*)
 
-###How fast will you be able to recoup your investment in post-secondary education?
->Our first research question addresses the question of how fast one is able to recoup their investment in post-secondary education. To investigate this question, analysis will be done on the income of those who graduate out of high school and enter the labour force, as well as the income of those who invest in a post-secondary education and begin working. Unemployment rate will also be considered when analyzing the results of the LFS.
+###How fast will you be able to recoup your investment in post-secondary education - money approach?
+>Our first research question addresses the question of how fast one is able to recoup their investment in post-secondary education. To investigate this question, analysis will be done on the income of those who graduate out of high school and enter the labour force, as well as the income of those who invest in a post-secondary education and begin working. 
 
-###Education Level vs. Quality of Life:
->Our second research question addresses the quality of life of different people, in comparison to their education level. This question hopes to answer the "worth" part of the question "Is a university education *worth* the investment?", as it compares the quality of life between people of different education levels. One of the main concerns of this question is the question of how to measure quality of life within the variables readily available, or in other words, how to quantify it in a way that can be used to analyze statistically without access to data such as happiness, emotional well-being, and such.
+###Education Level vs. Quality of Life - future progress approach:
+>Our second research question addresses the quality of life of different people, in comparison to their education level. This question hopes to answer the "worth" part of the question "Is a university education *worth* the investment?", as it compares the quality of life between people of different education levels. One of the main concerns of this question is the question of how to measure quality of life within the variables readily available, or in other words, how to quantify it in a way that can be used to analyze statistically without access to data such as happiness, emotional well-being, and such. We mainly analyze the unemployment rate and length of unemployment people who attend univeristy or not to see does post-secondary education lead them a better future, which means will they tend to be more actively seeking and more eaiser to get job in the job market.
 
 ## Data 
 
 (*Description of data used to answer the questions*)
 
-### How fast will you be able to recoup your investment in post-secondary education?
-
-##### Key Variables:
-* LFSTAT, labour force status in 2013 reference week. Used to filter and determine unemployment rate
-* CNDPERSP, total personal income from all sources in 2013. Will be used with other variables to determine income.
-* JOBINCP, gross annual earnings from 2013. Will be used with other variables to determine income.
-* DBTALGRD, debt of all loans at time of graduation (2009/10). Will be used to determine how much investment someone has made in post-secondary education prior to beginning employment.
- 
-### Attempting to quantify Quality of Life:
+### Main data used:
+Lfs2013: Labour force survey, 2013
+The Labour Force Survey is a monthly survey in which citizens of Canada are asked to respond to several questions which measure the state of the labour market in Canada. Among the information extracted from the survey are statistics like the employment status of citizens, the income of their jobs etc.
+Cis2013: Canadian Income Survey, 2013
+The Canadian Income Survey provides information related to each surveyed Canadian citizen's job status such as their age group, education level, and unemployment time length. We will be using this data to extrapolate the unemployment condition.
 
 ##### Group by:
-* age_12: Five-year age group of respondent
+* educ90: Highest educational attainment (1990- )
+  + This will be the grouping variable that helps identify whether people finish university in lfs.
+* age_12: Five-year age group of respondent in lfs
+  + This will be the grouping variable that shows unemployment rate and income difference through different age groups.
 * HLEV2G:  Highest level of education
+  + This will be the grouping variable that helps identify whether people finish university in cis.
 
-* HLEV2G:  Highest level of education
-  + This will be the grouping variable that shows sorts the QOL of different deducation levels.
 
 ##### Exclusion:
 
-* FLLPRTP: Flag - student during refyear
-  + This binary variable will be used to filter all current students
+* FLLPRTP: Full-time or part-time student during refyear
+  + This binary variable will be used to filter out all current full-time students, to make sure they won't effect the unemployment rate.
 
 
 ##### Independent variables to consider:
-For earning and unemployment
+For income:
 * hrlyearn: Usual hourly wages
+* age_12: Five-year age group of respondent in lfs
+（for this variable mainly use the combination of hrlyearn and it）
+
+For unemployment:
+*lfsstat: Labour force status
+* age_12: Five-year age group of respondent in lfs
+（for this variable mainly use the combination of lfsstat and it
 * WKSUEM: All persons aged 16 to 69 and persons aged 70 and over who worked during the reference year
-
-* USZGAP: Adjusted size of residence,
-* AGEGP: Age group,
-* MARST: Marital status,
-* FWORKED: Flag - employed during refyear,
-* ALFST: annual labour force status,
-* ATINC: after tax income,
-* CPPQPP: CPP/QPP benefits,
-* CQPC: Pension plan contributions,3
-* EARNG: earnings,
-* MAJRI: Major source of income,
-* OAS: Old age security pension,
-* RSPWI: RRSP withdrawals,
-* UIBEN: employment insurance benefits,
-* HHSIZE: number of household members,
-* DWLTYP: type of dwelling,
-* DWTENR: ownership of dwelling,
-* REPA: condition of dwelling
-
-  + Any combination of these variables may be considered to quantify QOL 
+ 
 
 ## Analysis 
 
