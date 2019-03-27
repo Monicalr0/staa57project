@@ -155,8 +155,8 @@ left_join(lfs_T,lfs_N, by = "age_12") %>% mutate(diff = unemploy_rate_N - unempl
 >We first estimate the unemployment rate for both group through age group. The "unemploy_rate_T" stands for the rate for people attend univeristy and "unemploy_rate_N" stands for those who not. Clearly, most of the diff is positive, which means that people who didn't have university degree will tend to have higher unemployment rate. Also, there is a trend showing that with ages grow, the difference tend to be smaller, which reveals that the university education are becoming more important as time goes. 
 
 ```{r}
-cis_new = cis %>% filter(hlev2g %in% c(1,2,3,4)) %>% mutate(hlev2g = factor(hlev2g, levels=1:4, labels = c("N", "N", "N", "T"))) %>% filter(wksuem %in% c(0:52)) 
-cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_histogram()
+cis_new = cis %>% filter(fllprtp != 1) %>% filter(hlev2g %in% c(1,2,3,4)) %>% mutate(hlev2g = factor(hlev2g, levels=1:4, labels = c("N", "N", "N", "T"))) %>% filter(wksuem %in% c(0:52)) 
+cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_histogram() 
 ```
 
 >Also, we use the data from cis to see if the post secondary degree would effect people on their unemployment length. Based on the graph above, though for almost each length there are both people with no degree and people with degree, but the people who don't have degree tend to have longer weeks of unemployment. 
