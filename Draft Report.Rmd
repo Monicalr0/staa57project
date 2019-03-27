@@ -155,15 +155,15 @@ left_join(lfs_T,lfs_N, by = "age_12") %>% mutate(diff = unemploy_rate_N - unempl
 >We first estimate the unemployment rate for both group through age group. The "unemploy_rate_T" stands for the rate for people attend univeristy and "unemploy_rate_N" stands for those who not. Clearly, most of the diff is positive, which means that people who didn't have university degree will tend to have higher unemployment rate. Also, there is a trend showing that with ages grow, the difference tend to be smaller, which reveals that the university education are becoming more important as time goes. 
 
 ```{r}
-cis_new = cis %>% filter(fllprtp != 1) %>% filter(hlev2g %in% c(1,2,3,4)) %>% mutate(hlev2g = factor(hlev2g, levels=1:4, labels = c("N", "N", "N", "T"))) %>% filter(wksuem %in% c(0:52)) 
-cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_histogram() 
+cis_new = cis %>% filter(hlev2g %in% c(1,2,3,4)) %>% mutate(hlev2g = factor(hlev2g, levels=1:4, labels = c("N", "N", "N", "T"))) %>% filter(wksuem %in% c(0:52)) 
+cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_histogram()
 ```
 
 >Also, we use the data from cis to see if the post secondary degree would effect people on their unemployment length. Based on the graph above, though for almost each length there are both people with no degree and people with degree, but the people who don't have degree tend to have longer weeks of unemployment. 
 
 ## Summary 
 
-(*Recap of your findings and conclusions*)
+>From our analysis we can see that in terms of hourly income, individuals that do opt for a university education end up earning a higher hourly wage. And if you were to project this by looking at the affect of this over time we see that the difference of wages of those who attended univeristy and those who did not attend grows and plateaus at around the age of 60-64, the typical age of retirement. Now in terms of actually securing a job after attending univeristy, we turn our analysis to the unemployment rates of those who attended univerisity and those who did not. Once we've done our calculations we see that there is indeed a difference in the respective unemployment rates. In fact they are indeed lower for the individuals who completed a university degree than those who chose not to. Now as time progresses we see that the difference does seem to get smaller and smaller but doesn't level out until after approximately the age of retirement. We also looked at the time of unemployment of individuals (in weeks) of the two respective groups. Our research showed us that individuals who completed university were umemployed for fewer weeks than those who did not complete a degree. Now we turn back to the initial question about "Is a university education worth it?". And based on the numbers for hourly wage and unemployment we can conclude that a university education is indeed worth the time, money and effort asked from young adults attending.   
 
 
 
