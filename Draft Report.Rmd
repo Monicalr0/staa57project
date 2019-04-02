@@ -14,7 +14,6 @@ library(tidyverse)
 
 <!-- 
 (everything below in here is an .html comment)
-
 Instructions: 
 - Use typical structure of data analysis report, w/ sections:
     + Introduction
@@ -28,7 +27,6 @@ Instructions:
 - Submit compressed project folder 
 - You submissions should be reproducible (i.e. I should be able to   
   re-compile your report with a click of the Preview/Knit button) 
-
 -->
 
 ## Introduction 
@@ -37,10 +35,8 @@ Instructions:
 
 ###How fast will you be able to recoup your investment in post-secondary education - money approach?
 >Our first research question addresses the question of how fast one is able to recoup their investment in post-secondary education. To investigate this question, analysis will be done on the income of those who graduate out of high school and enter the labour force, as well as the income of those who invest in a post-secondary education and begin working. 
-
 ###Education Level vs. Quality of Life - future progress approach:
->Our second research question addresses the quality of life of different people, in comparison to their education level. This question hopes to answer the "worth" part of the question "Is a university education *worth* the investment?", as it compares the quality of life between people of different education levels. One of the main concerns of this question is the question of how to measure quality of life within the variables readily available, or in other words, how to quantify it in a way that can be used to analyze statistically without access to data such as happiness, emotional well-being, and such. We mainly analyze the unemployment rate and length of unemployment people who attend univeristy or not to see does post-secondary education lead them a better future, which means will they tend to be more actively seeking and more eaiser to get job in the job market.
-
+>Our second research question addresses the quality of life of different people, in comparison to their education level. This question hopes to answer the "worth" part of the question "Is a university education *worth* the investment?", as it compares the quality of life between people of different education levels. One of the main concerns of this question is the question of how to measure quality of life within the variables readily available, or in other words, how to quantify it in a way that can be used to analyze statistically without access to data such as happiness, emotional well-being, and such. The first aspect is considering their ability to tolerant stress，for this part we analyze the unemployment rate and length of unemployment period of people who attend univeristy or not. In the aim to see whether post-secondary education lead them a better future, which means will they tend to be more actively seeking and more eaiser to get job in the job market when they face the condition of eagerly seeking for job. The second aspect is onsidering the life, we firstly analysis the marry condition of people at same age, which enable us to see whether post-secondary
 ## Data 
 
 (*Description of data used to answer the questions*)
@@ -78,9 +74,7 @@ For unemployment:
 （for this variable mainly use the combination of lfsstat and it
 * WKSUEM: All persons aged 16 to 69 and persons aged 70 and over who worked during the reference year
  
-
 ## Analysis 
-
 (*Main body of analysis, containing data summaries (tables/plots),  statistical analyses (estimations, tests), and modelling (regression, classification) *)
 ###Analysis upon income.
 <!-- You can organize content in subsections -->
@@ -90,17 +84,29 @@ For unemployment:
 ngs = read.csv("ngs.csv")
 cis = read.csv("cis.csv")
 lfs = read.csv("lfs.csv")
-ngs %>% head
-cis %>% head
-lfs %>% head
 ```
-> In this part, we want to see if attending post secondary education, or specifically, university education can lead to a higher income. 
+> In this part, we want to see if attending post secondary education, or specifically, university education can lead to a higher income.
+
+```{r}
+#the highest education effect on 1990 later
+
+lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N", "N", "NF", "T", "T", "T"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:6)
+```
+
+
+
+
+```{r}
+library(coin)
+lfs %>% mutate(educ90 = factor(educ90)) %>% independence_test(hrlyearn~educ90, data =., distribution ="approximate")
+```
+>The p_value is extremely small(.00000000000000022 << 5%), so we conclude that the hourly earning are different across education level. To veryfy this we use a boxplot to show the hourly earning diiference. 
 
 ```{r}
 library(ggplot2)
 #the highest education effect on 1990 later
 lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N", "N", "NF", "T", "T", "T"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:5) 
- lfs_90 %>% ggplot() + geom_boxplot(aes(x = educ90, y=hrlyearn)) + xlab("educ_status")  
+lfs_90 %>% ggplot() + geom_boxplot(aes(x = educ90, y=hrlyearn)) + xlab("educ_status")  
 ```
 > Firstly we do a basic comparison of the hourly earning between the highest education level. The data gives 7 different types of education level, from entry level to the Master degree. We choose the education data of 1990 later to make sure its up to date and devide these people into three groups showing the level they engage in the post secondary education. 
 >Based on the boxplot, it is clear that in average, most people who obatained a university degree are tend to have a higher hourly income. Also, the highest income that group of people can reach are much higher that two other groups. 
@@ -112,9 +118,7 @@ lfs_90_N = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N
 lfs_90_T = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N", "N", "N", "T", "T", "T"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:5) %>% filter(educ90 == "T")
 N_age = lfs_90_N %>% group_by(age_12) %>% summarise(avg_income_N = mean(hrlyearn, na.rm = TRUE))
 T_age = lfs_90_T %>% group_by(age_12) %>% summarise(avg_income_T = mean(hrlyearn, na.rm = TRUE))
-
 left_join(T_age, N_age, by = "age_12") %>% mutate(diff = avg_income_T - avg_income_N) %>% knitr::kable()
-
 left_join(T_age, N_age, by = "age_12") %>% mutate(diff = avg_income_T - avg_income_N) %>% ggplot(aes(x = age_12, y = diff)) + geom_point( )
 ```
 
@@ -134,9 +138,7 @@ for more help on RMarkdown see: https://rmarkdown.rstudio.com/lesson-15.html
 ```{r}
 lfs_N = lfs %>% filter(lfsstat != 6) %>%mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N", "N", "N", "T", "T", "T"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:5) %>% filter(educ90 == "N") %>% mutate(lfsstat = (lfsstat >= 3)) %>% group_by(age_12) %>% summarise(unemploy_rate_N = mean(lfsstat))
 lfs_T = lfs %>% filter(lfsstat != 6) %>%mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N", "N", "N", "T", "T", "T"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:5) %>% filter(educ90 == "T") %>% mutate(lfsstat = (lfsstat >= 3)) %>% group_by(age_12) %>% summarise(unemploy_rate_T = mean(lfsstat))
-
 left_join(lfs_T,lfs_N, by = "age_12") %>% mutate(diff = unemploy_rate_N - unemploy_rate_T )%>% knitr::kable()
-
 ```
 >We first estimate the unemployment rate for both group through age group. The "unemploy_rate_T" stands for the rate for people attend univeristy and "unemploy_rate_N" stands for those who not. Clearly, most of the diff is positive, which means that people who didn't have university degree will tend to have higher unemployment rate. Also, there is a trend showing that with ages grow, the difference tend to be smaller, which reveals that the university education are becoming more important as time goes. 
 
@@ -147,9 +149,16 @@ cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_
 
 >Also, we use the data from cis to see if the post secondary degree would effect people on their unemployment length. Based on the graph above, though for almost each length there are both people with no degree and people with degree, but the people who don't have degree tend to have longer weeks of unemployment. 
 
+```{r}
+library(ggmosaic)
+lfs_90 %>% mutate(marstat = factor(marstat)) %>% ggplot() + geom_mosaic(aes(x = product(educ90), fill = marstat)) + xlab("educ") + ylab("marstat")
+```
+>Finally, we want to see if having education have any effects on people's daily life. With the mosaic graph, we can easily see that the education can lead to a higher rate of married.
+
 ## Summary 
 
 >From our analysis we can see that in terms of hourly income, individuals that do opt for a university education end up earning a higher hourly wage. And if you were to project this by looking at the affect of this over time we see that the difference of wages of those who attended univeristy and those who did not attend grows and plateaus at around the age of 60-64, the typical age of retirement. Now in terms of actually securing a job after attending univeristy, we turn our analysis to the unemployment rates of those who attended univerisity and those who did not. Once we've done our calculations we see that there is indeed a difference in the respective unemployment rates. In fact they are indeed lower for the individuals who completed a university degree than those who chose not to. Now as time progresses we see that the difference does seem to get smaller and smaller but doesn't level out until after approximately the age of retirement. We also looked at the time of unemployment of individuals (in weeks) of the two respective groups. Our research showed us that individuals who completed university were umemployed for fewer weeks than those who did not complete a degree. Now we turn back to the initial question about "Is a university education worth it?". And based on the numbers for hourly wage and unemployment we can conclude that a university education is indeed worth the time, money and effort asked from young adults attending.   
+
 
 
 
@@ -158,5 +167,4 @@ cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_
 ## Appendix 
 
 (*Everything here does not count towards page limit*)
-
 
