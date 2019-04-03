@@ -83,20 +83,16 @@ For unemployment:
 ```{r}
 ngs = read.csv("ngs.csv")
 cis = read.csv("cis.csv")
-lfs = read.csv("lfs.csv")
+#lfs = read.csv("lfs.csv")
 ```
+
+
 > In this part, we want to see if attending post secondary education, or specifically, university education can lead to a higher income.
-
-```{r}
-#the highest education effect on 1990 later
-
-lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N", "N", "NF", "T", "T", "T"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:6)
-```
 
 ```{r}
 library(ggplot2)
 #the highest education effect on 1990 later
-lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("N", "N", "N", "NF", "T", "T", "T"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:6) 
+lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("Not attend", "Not attend", "Not attend", "Not finshied", "Finished", "Finished", "Finished"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:6) 
 lfs_90 %>% ggplot() + geom_boxplot(aes(x = educ90, y=hrlyearn)) + xlab("educ_status")  
 ```
 > Firstly we do a basic comparison of the hourly earning between the highest education level. The data gives 7 different types of education level, from entry level to the Master degree. We choose the education data of 1990 later to make sure its up to date and devide these people into three groups showing the level they engage in the post secondary education. 
@@ -134,21 +130,36 @@ left_join(lfs_T,lfs_N, by = "age_12") %>% mutate(diff = unemploy_rate_N - unempl
 >We first estimate the unemployment rate for both group through age group. The "unemploy_rate_T" stands for the rate for people attend univeristy and "unemploy_rate_N" stands for those who not. Clearly, most of the diff is positive, which means that people who didn't have university degree will tend to have higher unemployment rate. Also, there is a trend showing that with ages grow, the difference tend to be smaller, which reveals that the university education are becoming more important as time goes. 
 
 ```{r}
-cis_new = cis %>% filter(hlev2g %in% c(1,2,3,4)) %>% mutate(hlev2g = factor(hlev2g, levels=1:4, labels = c("N", "N", "N", "T"))) %>% filter(wksuem %in% c(0:52)) 
+cis_new = cis %>% filter(hlev2g %in% c(1,2,3,4)) %>% mutate(hlev2g = factor(hlev2g, levels=1:4, labels = c("Not Attend", "Not Attend", "Not Finished", "Attended"))) %>% filter(wksuem %in% c(0:52)) 
 cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_histogram()
 ```
 
 >Also, we use the data from cis to see if the post secondary degree would effect people on their unemployment length. Based on the graph above, though for almost each length there are both people with no degree and people with degree, but the people who don't have degree tend to have longer weeks of unemployment. 
 
 ```{r}
+library(coin)
+
+```
+
+```{r}
 library(ggmosaic)
-lfs_90 %>% mutate(marstat = factor(marstat)) %>% ggplot() + geom_mosaic(aes(x = product(educ90), fill = marstat)) + xlab("educ") + ylab("marstat")
+lfs_90 %>% filter(age_12 %in% c(3:7))%>% mutate(marstat = factor(marstat, level = 1:6, labels = c("Married", "Living in common law", "Widowed", "Seprated", "Divorced", "Single, never married"))) %>% ggplot() + geom_mosaic(aes(x = product(educ90), fill = marstat)) + xlab("educ") + ylab("marstat")
 ```
 >Finally, we want to see if having education have any effects on people's daily life. With the mosaic graph, we can easily see that the education can lead to a higher rate of married.
+
+```{r}
+lfs_90 %>% filter(age_12 %in% c(3:7)) %>% mutate(marstat = factor(marstat, level = 1:6, labels = c("Married", "Living in common law", "Widowed", "Seprated", "Divorced", "Single, never married"))) %>% independence_test(marstat ~ educ90, data = ., 
+      alternative = "two.sided" )
+```
+
 
 ## Summary 
 
 >From our analysis we can see that in terms of hourly income, individuals that do opt for a university education end up earning a higher hourly wage. And if you were to project this by looking at the affect of this over time we see that the difference of wages of those who attended univeristy and those who did not attend grows and plateaus at around the age of 60-64, the typical age of retirement. Now in terms of actually securing a job after attending univeristy, we turn our analysis to the unemployment rates of those who attended univerisity and those who did not. Once we've done our calculations we see that there is indeed a difference in the respective unemployment rates. In fact they are indeed lower for the individuals who completed a university degree than those who chose not to. Now as time progresses we see that the difference does seem to get smaller and smaller but doesn't level out until after approximately the age of retirement. We also looked at the time of unemployment of individuals (in weeks) of the two respective groups. Our research showed us that individuals who completed university were umemployed for fewer weeks than those who did not complete a degree. Now we turn back to the initial question about "Is a university education worth it?". And based on the numbers for hourly wage and unemployment we can conclude that a university education is indeed worth the time, money and effort asked from young adults attending.   
+
+```{r}
+cis_new %>% filter(efmjsi %in% c(02, 03, 05, 06)) %>% filter(efmjie == 1) %>% filter(agegp %in% c(5:15))%>% mutate(agegp = factor(agegp, levels = 5:15, labels = c("18~19","20~24", "25~29", "30~34", "35~39", "40~44", "45~49", "50~54", "55~59", "60~64", "65~69")))%>% ggplot(aes(x = hlev2g, y= efmjie)) + geom_histogram(stat = "identity") + facet_wrap(.~agegp) + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
 
 
