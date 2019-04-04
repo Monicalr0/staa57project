@@ -1,7 +1,9 @@
 ---
-title: "STAA57 Final Project Report "
+title: 'STAA57 Final Project Report '
 author: "Brian Lin, Ian Gu, Minyi Ma, Navin Chandradat"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ## echo=FALSE stops the code chunk from appearing in the html document
@@ -83,7 +85,7 @@ For unemployment:
 ```{r}
 ngs = read.csv("ngs.csv")
 cis = read.csv("cis.csv")
-#lfs = read.csv("lfs.csv")
+lfs = read.csv("lfs.csv")
 ```
 
 
@@ -92,8 +94,8 @@ cis = read.csv("cis.csv")
 ```{r}
 library(ggplot2)
 #the highest education effect on 1990 later
-lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("Not attend", "Not attend", "Not attend", "Not finshied", "Finished", "Finished", "Finished"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:6) 
-lfs_90 %>% ggplot() + geom_boxplot(aes(x = educ90, y=hrlyearn)) + xlab("educ_status")  
+lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("Not attend", "Not attend", "Not attend", "Not finshied", "Finished", "Finished", "Finished"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:6)
+lfs_90 %>% filter(!is.na(hrlyearn)) %>% ggplot() + geom_boxplot(aes(x = educ90, y=hrlyearn)) + xlab("educ_status")  
 ```
 > Firstly we do a basic comparison of the hourly earning between the highest education level. The data gives 7 different types of education level, from entry level to the Master degree. We choose the education data of 1990 later to make sure its up to date and devide these people into three groups showing the level they engage in the post secondary education. 
 >Based on the boxplot, it is clear that in average, most people who obatained a university degree are tend to have a higher hourly income. Also, the highest income that group of people can reach are much higher that two other groups. 
