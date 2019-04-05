@@ -70,21 +70,22 @@ Instructions:
 
 ##### Independent variables to consider:
 For income:
+
 * hrlyearn: Usual hourly wages
 * age_12: Five-year age group of respondent in lfs
 （for this variable mainly use the combination of hrlyearn and it）
 
 For unemployment:
-*lfsstat: Labour force status
+
+* lfsstat: Labour force status
 * age_12: Five-year age group of respondent in lfs
-（for this variable mainly use the combination of lfsstat and it
 * WKSUEM: All persons aged 16 to 69 and persons aged 70 and over who worked during the reference year
  
 ## Analysis 
-(*Main body of analysis, containing data summaries (tables/plots),  statistical analyses (estimations, tests), and modelling (regression, classification) *)
-### Analysis upon income.
-<!-- You can organize content in subsections -->
-(*Plots should be created in R, and not imported from file*)
+
+### Analysis of income.
+
+
 
 ```{r}
 ngs = read.csv("ngs.csv")
@@ -101,6 +102,7 @@ library(ggplot2)
 lfs_90 = lfs %>% mutate(educ90 = factor(educ90, levels=0:6, labels = c("Not attend", "Not attend", "Not attend", "Not finshied", "Finished", "Finished", "Finished"))) %>% mutate(pick = is.na(educ90)) %>% filter(pick == FALSE) %>% select(1:6)
 lfs_90 %>% filter(!is.na(hrlyearn)) %>% ggplot() + geom_boxplot(aes(x = educ90, y=hrlyearn)) + xlab("educ_status")  
 ```
+
 > Firstly we do a basic comparison of the hourly earning between the highest education level. The data gives 7 different types of education level, from entry level to the Master degree. We choose the education data of 1990 later to make sure its up to date and devide these people into three groups showing the level they engage in the post secondary education. 
 Based on the boxplot, it is clear that in average, most people who obatained a university degree are tend to have a higher hourly income. Also, the highest income that group of people can reach are much higher that two other groups. 
 Another thing that can be discovered from the graph is that though highly closed, the *NF* group(people who does attend but not finish the post secondary education), however, have the lowest income on average, and the also the highest income of that group is the lowest among that of the three groups. Which may shows that the paid back of taking university eucation is also related to whether taking the complete 4 years or more. 
@@ -120,7 +122,7 @@ For more specific apporach, we then look at the difference of the difference of 
 
 
 
-#### Analysis upon unemployment
+### Analysis of unemployment
 
 
 > Secondly, we want to see if the university offer people higher chance to get a job, which means will the unemployment rate be lower or will the unemployment period will be shorter if for the population who does finsih their university education. 
@@ -140,6 +142,8 @@ cis_new %>% filter(wksuem != 0) %>% ggplot(aes(x = wksuem, fill = hlev2g))+geom_
 
 >Also, we use the data from cis to see if the post secondary degree would effect people on their unemployment length. Based on the graph above, though for almost each length there are both people with no degree and people with degree, but the people who don't have degree tend to have longer weeks of unemployment. 
 
+### Analysis of QOL
+
 ```{r}
 library(coin)
 
@@ -149,6 +153,7 @@ library(coin)
 library(ggmosaic)
 lfs_90 %>% filter(age_12 %in% c(3:7))%>% mutate(marstat = factor(marstat, level = 1:6, labels = c("Married", "Living in common law", "Widowed", "Seprated", "Divorced", "Single, never married"))) %>% ggplot() + geom_mosaic(aes(x = product(educ90), fill = marstat)) + xlab("educ") + ylab("marstat")
 ```
+
 >Finally, we want to see if having education have any effects on people's daily life. With the mosaic graph, we can easily see that the education can lead to a higher rate of married.
 
 ```{r}
